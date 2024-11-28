@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jdr/pages/character_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
           inversePrimary: Colors.grey.shade900
         )
       ),
+      debugShowCheckedModeBanner: true,
       home: const MyHomePage(title: 'JDR viewer'),
     );
   }
@@ -54,14 +56,22 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView(
-        children: const [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-            ],
+        
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CharacterView()));
+            },
+            child: const ListTile(
+              leading: Icon(Icons.person),
+              title: Text("Character name"),
+              subtitle: Text("Knight"),
+              trailing: Icon(Icons.more_horiz),
+            ),
           ),
-        ]
+        ],
       ),
     );
   }
 }
+
