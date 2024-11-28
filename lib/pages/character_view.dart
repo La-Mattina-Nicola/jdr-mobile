@@ -30,12 +30,12 @@ class CharacterView extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     children: const [
-                      Text('John Doe', style: TextStyle(fontSize: 18)),
-                      Text('JD', style: TextStyle(fontSize: 18)),
-                      Text('Leader', style: TextStyle(fontSize: 18)),
-                      Text('Record Holder', style: TextStyle(fontSize: 18)),
-                      Text('Eagle', style: TextStyle(fontSize: 18)),
-                      Text('Alpha', style: TextStyle(fontSize: 18)),
+                      Text('Garibaldi', style: TextStyle(fontSize: 18)),
+                      Text('Le fondateur', style: TextStyle(fontSize: 18)),
+                      Text('Citoyen', style: TextStyle(fontSize: 18)),
+                      Text('Création du Knight', style: TextStyle(fontSize: 18)),
+                      Text('Blason : Dragon', style: TextStyle(fontSize: 18)),
+                      Text('Section : Alpha', style: TextStyle(fontSize: 18)),
                     ],
                   ),
                 ),
@@ -90,13 +90,13 @@ class CharacterView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  statContainer("PA", "150", 73.0),
+                  statContainer("PA", "20/40", 73.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("PE", "80", 73.0),
+                  statContainer("PE", "62/80", 73.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("CDF", "60", 73.0),
+                  statContainer("CDF", "14/14", 73.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("PS", "100", 73.0),
+                  statContainer("PS", "34/34", 73.0),
                 ],
               ),
             ),
@@ -106,9 +106,9 @@ class CharacterView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  statContainer("Point de gloire", "150", 150.0),
+                  statContainer("Point de gloire", "13/188", 150.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Point d'expérience", "80", 150.0),
+                  statContainer("Point d'expérience", "3/115", 150.0),
                 ],
               ),
             ),
@@ -118,11 +118,11 @@ class CharacterView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  statContainer("Héroïsme", "150", 100.0),
+                  statContainer("Héroïsme", "5", 100.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Contact", "80", 100.0),
+                  statContainer("Contact", "6", 100.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Espoir", "80", 100.0),
+                  statContainer("Espoir", "45/53", 100.0),
                 ],
               ),
             ),
@@ -132,11 +132,11 @@ class CharacterView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  statContainer("Défense", "150", 100.0),
+                  statContainer("Défense", "4/5", 100.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Réaction", "80", 100.0),
+                  statContainer("Réaction", "3/4", 100.0),
                   Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Initiative", "80", 100.0),
+                  statContainer("Initiative", "3/3", 100.0),
                 ],
               ),
             ),
