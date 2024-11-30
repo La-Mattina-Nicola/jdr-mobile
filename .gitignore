@@ -46,3 +46,4 @@ app.*.map.json
 config.dart
 google-services.json
 .env
+config.dart
