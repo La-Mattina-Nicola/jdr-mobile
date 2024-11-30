@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "709240452582",
+    "project_id": "jdr-viewer",
+    "storage_bucket": "jdr-viewer.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709240452582:android:098f865e6d0208ace2d227",
+        "android_client_info": {
+          "package_name": "com.Kioyaa.connection"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwg95ZoQGCtX5eGBqa3YIYav2IQNrHYd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

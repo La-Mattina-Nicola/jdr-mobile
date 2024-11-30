@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:jdr/auth/auth_service.dart';
 
-class CharacterView extends StatelessWidget {
-  const CharacterView({super.key});
+class CharacterPage extends StatelessWidget {
+  const CharacterPage({super.key});
+
+  void logout() {
+    final _authService = AuthService();
+    _authService.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Fiche personnage"),
+        actions: [
+          IconButton(onPressed: logout, icon: Icon(Icons.logout))
+        ],
       ),
       body: Center(
         child: Column(
