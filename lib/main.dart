@@ -1,7 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:jdr/pages/character_view.dart';
+import 'package:jdr/auth/auth_gate.dart';
+import 'package:jdr/firebase_options.dart';
+import 'package:jdr/pages/character_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -34,7 +39,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       debugShowCheckedModeBanner: true,
-      home: const MyHomePage(title: 'JDR viewer'),
+      home: const AuthGate(),
     );
   }
 }
@@ -60,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const CharacterView()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const CharacterPage()));
             },
             child: const ListTile(
               leading: Icon(Icons.person),
