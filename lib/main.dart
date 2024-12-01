@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jdr/auth/auth_gate.dart';
 import 'package:jdr/firebase_options.dart';
-import 'package:jdr/pages/character_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,40 +42,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: ListView(
-        
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const CharacterPage()));
-            },
-            child: const ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Character name"),
-              subtitle: Text("Knight"),
-              trailing: Icon(Icons.more_horiz),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
