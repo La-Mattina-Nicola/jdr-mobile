@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jdr/components/my_button.dart';
 import 'package:jdr/components/my_textfield.dart';
-import 'package:jdr/auth/auth_service.dart';
+import 'package:jdr/services/auth/auth_service.dart';
 import 'package:jdr/pages/register_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -15,6 +15,7 @@ class LoginPage extends StatelessWidget {
      
     try {
       await authService.signInWithEmailPassword(emailController.text, passwordController.text);
+      Navigator.pop(context);
     } catch(e) {
       showDialog(context: context, builder: (context) => AlertDialog(
         title: Text('Error : $e', style: TextStyle(fontSize: 15),),

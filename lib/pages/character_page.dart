@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jdr/auth/auth_service.dart';
+import 'package:jdr/services/auth/auth_service.dart';
+import 'package:jdr/components/my_menu.dart';
 
 class CharacterPage extends StatelessWidget {
   const CharacterPage({super.key});
@@ -15,9 +16,16 @@ class CharacterPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Fiche personnage"),
         actions: [
-          IconButton(onPressed: logout, icon: Icon(Icons.logout))
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(Icons.edit),
+            ),
+          )
         ],
       ),
+      drawer: MyDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -26,16 +34,16 @@ class CharacterPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
-                  flex: 1, // Image takes 1/3 of the width
+                  flex: 1, 
                   child: Image.network(
-                    'https://knight-jdr.fr/images/armures/Wizard_R.png', // Replace with your image URL
-                    width: 200, // Adjust width if needed
-                    height: 150, // Adjust height if needed
+                    'https://knight-jdr.fr/images/armures/Wizard_R.png', 
+                    width: 200, 
+                    height: 250, 
                   ),
                 ),
-                const SizedBox(width: 20), // Add some space between the image and text
+                const SizedBox(width: 20), 
                 Flexible(
-                  flex: 2, // Text takes 2/3 of the width
+                  flex: 2, 
                   child: ListView(
                     shrinkWrap: true,
                     children: const [
@@ -50,103 +58,63 @@ class CharacterPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 20), // Add some space between the row and buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to stats screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const StatsScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom( backgroundColor: Colors.redAccent,),
-                  child: const Text(
-                    "Stats",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+            Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: SizedBox(
+                height: 200,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  child: ListView(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Statistiques", style: TextStyle(fontSize: 20)),
+                            Text("Actuel", style: TextStyle(fontSize: 20)),
+                            Text("Maximum", style: TextStyle(fontSize: 20))
+                          ],
+                        ),
+                      ),
+                      statContainer(context, "Point d'armure", "20", "40"),
+                      statContainer(context, "Point d'énergie", "62", "80"),
+                      statContainer(context, "Champ de force", "14", "14"),
+                      statContainer(context, "Point de sante", "34", "34"),
+                      statContainer(context, "Point de gloire", "13", "188"),
+                      statContainer(context, "Point d'epérience", "3", "115"),
+                      statContainer(context, "Héroïsme", "5"),
+                      statContainer(context, "Contact", "6"),
+                      statContainer(context, "Espoir", "45", "53"),
+                      statContainer(context, "Défense", "4/5"),
+                      statContainer(context, "Réaction", "3/4"),
+                      statContainer(context, "Initiative", "3/3"),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 20), // Add some space between the buttons
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to combat screen
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const CombatScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom( backgroundColor: Colors.redAccent,),
-                  child: const Text(
-                    "Combat",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              ),
+            ),
+            SizedBox(
+              height: 200,
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: ListView(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Inventaire", style: TextStyle(fontSize: 20)),
+                      ],
                     ),
-                  ),
+                    statContainer(context, "TEST", "azdpok")
+                  ],
                 ),
-              ],
-            ),
-            const SizedBox(height: 20), // Add some space between the buttons and stats
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  statContainer("PA", "20/40", 73.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("PE", "62/80", 73.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("CDF", "14/14", 73.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("PS", "34/34", 73.0),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10), // Add some space between the buttons and stats
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  statContainer("Point de gloire", "13/188", 150.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Point d'expérience", "3/115", 150.0),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10), // Add some space between the buttons and stats
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  statContainer("Héroïsme", "5", 100.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Contact", "6", 100.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Espoir", "45/53", 100.0),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10), // Add some space between the buttons and stats
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  statContainer("Défense", "4/5", 100.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Réaction", "3/4", 100.0),
-                  Padding(padding: const EdgeInsets.all(2)),
-                  statContainer("Initiative", "3/3", 100.0),
-                ],
               ),
             ),
           ],
@@ -156,36 +124,57 @@ class CharacterPage extends StatelessWidget {
   }
 }
 
-Widget statContainer(String title, String value, double? width) {
-  return Container(
-    width: width,
-    padding: const EdgeInsets.all(8),
-    decoration: BoxDecoration(
-      color: Colors.redAccent,
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.white,
+Widget statContainer(BuildContext context, String title, String minimum, [String? maximum]) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 5),
+    child: Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.tertiary,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.white,
+              ),
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          value,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+          Flexible(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  minimum,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if(maximum != null)
+                  Text("/"),
+                if(maximum != null)
+                  Text(
+                    maximum,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 }

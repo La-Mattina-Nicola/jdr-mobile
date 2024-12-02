@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jdr/auth/auth_service.dart';
+import 'package:jdr/services/auth/auth_service.dart';
 import 'package:jdr/components/my_button.dart';
 import 'package:jdr/components/my_textfield.dart';
 
@@ -10,12 +10,13 @@ class RegisterPage extends StatelessWidget {
 
   RegisterPage({super.key});
 
-  void register(BuildContext context) {
+  void register(BuildContext context) async {
     final authService = AuthService();
 
     if(passwordController.text == password2Controller.text) {
       try {
         authService.signUpWithEmailAndPassword(emailController.text, passwordController.text);
+        Navigator.pop(context);
       } on Exception catch (e) {
         showDialog(context: context, builder: (context) => AlertDialog(
           title: Text('Error : $e', style: TextStyle(fontSize: 15),),

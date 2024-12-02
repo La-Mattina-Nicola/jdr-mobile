@@ -4,6 +4,7 @@ class MyItemMenu extends StatelessWidget {
   final String text;
   final IconData icon;
   final Color? color;
+  final Widget? leading;
   final Widget? trailing;
   final Widget? subtitle;
   final void Function()? onTap;
@@ -14,6 +15,7 @@ class MyItemMenu extends StatelessWidget {
     required this.icon,
     this.onTap,
     this.color,
+    this.leading,
     this.trailing,
     this.subtitle,
   });
@@ -25,7 +27,7 @@ class MyItemMenu extends StatelessWidget {
       child: ListTile(
         title: Text(text, style: TextStyle(fontSize: 15),),
         subtitle: subtitle,
-        leading: Icon(icon, color: color ?? Theme.of(context).colorScheme.tertiary),
+        leading: leading ?? Icon(icon, color: color ?? Theme.of(context).colorScheme.tertiary),
         trailing: trailing,
         onTap: onTap
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jdr/components/my_item_menu.dart';
 
-import '../auth/auth_service.dart';
+import '../services/auth/auth_service.dart';
 
 class MyDrawer extends StatelessWidget {
   
@@ -42,6 +42,7 @@ class MyDrawer extends StatelessWidget {
           ),
           Column(
             children: [
+              MyItemMenu(text: "S H O P", icon: Icons.shop),
               MyItemMenu(
                 text: "L O G O U T", 
                 icon: Icons.logout,

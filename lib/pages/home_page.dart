@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:jdr/components/my_item_menu.dart';
+import 'package:jdr/pages/add_character_page.dart';
 import 'package:jdr/pages/character_page.dart';
 
 import '../components/my_menu.dart';
@@ -17,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text('HOME'),
       ), 
       drawer: MyDrawer(),
@@ -33,15 +34,21 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddCharacterPage()),
+                    );
+                  },
                   child: Icon(Icons.add),
                 ),
               )
             ],
           ),
           MyItemMenu(
-            text: "Wizard : Garibaldi",
+            leading: Image.network('https://knight-jdr.fr/images/armures/Wizard_R.png',),
             icon: Icons.person,
+            text: "Wizard : Garibaldi",
             color: Colors.white,
             subtitle: Text("Knight"),
             trailing: Icon(Icons.more_horiz),
