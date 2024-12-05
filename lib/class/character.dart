@@ -1,8 +1,9 @@
 import 'package:jdr/class/stat.dart';
 import 'package:jdr/services/class/character_service.dart';
+import 'package:uuid/uuid.dart';
 
 class Character {
-  String id;
+  String? id;
   String name;
   String characterClass;
   String game;
@@ -10,15 +11,17 @@ class Character {
   String? imageUrl;
   List<Stat> stats;
 
+  static const Uuid _uuid = Uuid();
+
   Character({
-    required this.id,
+    String? id,
     required this.name,
     required this.characterClass,
     required this.game,
     this.other,
     this.imageUrl,
     this.stats = const [],
-  });
+  }) : id = id ?? _uuid.v4();
 
   Future<void> createCharacter(String userId) async {
     await CharacterService().createCharacter(this, userId);
@@ -48,13 +51,19 @@ class Character {
     game = newGame;
   }
 
+  @override
+  String toString() {
+    return 'User{name: $name, characterClass: $characterClass, stats: $stats}';
+  }
+
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'class': characterClass,
       'game': game,
       'other': other,
-      'imageUrl': imageUrl,
+      'imageUrl': imageUrl ?? '',
       'stats': stats.map((stat) => stat.toMap()).toList(),
     };
   }
@@ -70,4 +79,5 @@ class Character {
       stats: List<Stat>.from(map['stats']?.map((item) => Stat.fromMap(item)) ?? []),
     );
   }
+
 }

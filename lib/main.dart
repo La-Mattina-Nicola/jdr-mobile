@@ -1,12 +1,16 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:jdr/services/auth/auth_gate.dart';
-import 'package:jdr/firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  await Firebase.initializeApp();
+  await FirebaseAppCheck.instance.activate(
+    // Vous pouvez également utiliser un fournisseur différent si nécessaire
+    webProvider: ReCaptchaV3Provider('43DB7BFB-92CF-424B-A274-6D2E527A4E8C'),
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

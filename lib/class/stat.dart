@@ -1,4 +1,5 @@
 import 'package:jdr/services/class/stat_service.dart';
+import 'package:uuid/uuid.dart';
 
 class Stat {
   String? id;
@@ -6,12 +7,19 @@ class Stat {
   int value;
   int? max;
 
+  static const Uuid _uuid = Uuid();
+
   Stat({
-    this.id,
+    String? id,
     required this.name,
     required this.value,
     this.max,
-  });
+  }) : id = id ?? _uuid.v4();
+
+  @override
+  String toString() {
+    return 'User{id: $id, name: $name, value: $value, max: $max}';
+  }
 
   Future<void> createStat(String userId, String characterId) async {
     await StatService().createStat(this, userId, characterId);
@@ -59,18 +67,21 @@ class Stat {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'value': value,
-      'max': max,
+      'max': max ?? '',
     };
   }
 
   factory Stat.fromMap(Map<String, dynamic> map) {
-    return Stat(
+    Stat s =  Stat(
       id: map['id'],
       name: map['name'],
-      value: map['value'],
-      max: map['max'],
+      value: map['value'] is String ? int.parse(map['value']) : map['value'] as int,
+      max: map['max'] != null ? (map['max'] is String ? int.parse(map['max']) : map['max'] as int?) : null,
     );
+    print(s);
+    return s;
   }
 }

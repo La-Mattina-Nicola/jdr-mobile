@@ -27,7 +27,9 @@ class MyDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     Icon(Icons.person, color: Theme.of(context).colorScheme.tertiary, size: 64,),
-                    Text(_auth.getCurrentUser()!.email.toString()),
+                    Text(_auth.getCurrentUser() != null ?
+                      _auth.getCurrentUser()!.email.toString() : ''
+                      ),
                   ],
                 ),
               ),

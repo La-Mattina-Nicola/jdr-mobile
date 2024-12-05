@@ -5,14 +5,19 @@ class User {
   String? id;
   String name;
   String email;
-  List<Character> characters;
+  List<Character>? characters;
 
   User({
     this.id,
     required this.name,
     required this.email,
-    this.characters = const [],
+    this.characters,
   });
+
+  @override
+  String toString() {
+    return 'User{id: $id, name: $name, email: $email, characters: $characters}';
+  }
 
   Future<void> createUser() async {
     await UserService().createUser(this);
@@ -30,9 +35,13 @@ class User {
     await UserService().deleteUser(id);
   }
 
+  Future<void> createCharacterCollection() async {
+    await UserService().createCharacterCollection(id!);
+  }
+
   Character? findCharacterById(String id) {
     try {
-      return characters.firstWhere((character) => character.id == id);
+      return characters!.firstWhere((character) => character.id == id);
     } catch (e) {
       return null;
     }
@@ -46,13 +55,13 @@ class User {
     return {
       'name': name,
       'email': email,
-      'characters': characters.map((character) => character.toMap()).toList(),
+      'characters': characters?.map((character) => character.toMap()).toList(),
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['id'],
+      id: map['uid'],
       name: map['name'],
       email: map['email'],
       characters: List<Character>.from(map['characters']?.map((item) => Character.fromMap(item)) ?? []),
